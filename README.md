@@ -1,8 +1,4 @@
 # RQ Engine
-<<<<<<< HEAD
-Hi
-=======
-
 
 #### Setup
 Creates folders ands runs cmake and make on libraries
@@ -14,4 +10,3 @@ Creates folders ands runs cmake and make on libraries
 ```
 ./build.sh
 ```
->>>>>>> master

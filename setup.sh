@@ -5,4 +5,9 @@ cd build-libs
 mkdir -p SFML
 cd SFML
 cmake ../../libs/SFML
-make
+
+if [[ "$OSTYPE" == "win32" ]]; then
+    mingw32-make
+else
+    make
+fi

@@ -3,4 +3,9 @@
 mkdir -p bin
 cd bin
 cmake ..
-make
+
+if [[ "$OSTYPE" == "win32" ]]; then
+    mingw32-make
+else
+    make
+fi
