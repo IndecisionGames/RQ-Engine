@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2019 Marco Antognini (antognini.marco@gmail.com),
+// Copyright (C) 2007-2018 Marco Antognini (antognini.marco@gmail.com),
 //                         Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
@@ -55,7 +55,7 @@ namespace priv
 /// \return nil if something went wrong or a SFOpenGLView*.
 ///
 ////////////////////////////////////////////////////////////
-SFOpenGLView* getSFOpenGLViewFromSFMLWindow(const WindowBase& window)
+SFOpenGLView* getSFOpenGLViewFromSFMLWindow(const Window& window)
 {
     id nsHandle = (id)window.getSystemHandle();
 
@@ -158,7 +158,7 @@ Vector2i InputImpl::getMousePosition()
 
 
 ////////////////////////////////////////////////////////////
-Vector2i InputImpl::getMousePosition(const WindowBase& relativeTo)
+Vector2i InputImpl::getMousePosition(const Window& relativeTo)
 {
     SFOpenGLView* view = getSFOpenGLViewFromSFMLWindow(relativeTo);
 
@@ -193,7 +193,7 @@ void InputImpl::setMousePosition(const Vector2i& position)
 
 
 ////////////////////////////////////////////////////////////
-void InputImpl::setMousePosition(const Vector2i& position, const WindowBase& relativeTo)
+void InputImpl::setMousePosition(const Vector2i& position, const Window& relativeTo)
 {
     SFOpenGLView* view = getSFOpenGLViewFromSFMLWindow(relativeTo);
 
@@ -226,7 +226,7 @@ Vector2i InputImpl::getTouchPosition(unsigned int /*finger*/)
 
 
 ////////////////////////////////////////////////////////////
-Vector2i InputImpl::getTouchPosition(unsigned int /*finger*/, const WindowBase& /*relativeTo*/)
+Vector2i InputImpl::getTouchPosition(unsigned int /*finger*/, const Window& /*relativeTo*/)
 {
     // Not applicable
     return Vector2i();

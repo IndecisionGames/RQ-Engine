@@ -28,7 +28,6 @@
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/EGLCheck.hpp>
 #include <SFML/System/Err.hpp>
-#include <glad/egl.h>
 
 
 namespace sf
@@ -36,7 +35,7 @@ namespace sf
 namespace priv
 {
 ////////////////////////////////////////////////////////////
-void eglCheckError(const char* file, unsigned int line, const char* expression)
+void eglCheckError(const char* file, unsigned int line)
 {
     // Obtain information about the success or failure of the most recent EGL
     // function called in the current thread
@@ -153,8 +152,7 @@ void eglCheckError(const char* file, unsigned int line, const char* expression)
         // Log the error
         err() << "An internal EGL call failed in "
               << fileString.substr(fileString.find_last_of("\\/") + 1) << " (" << line << ") : "
-            << "\nExpression:\n   " << expression
-            << "\nError description:\n   " << error << "\n   " << description << "\n"
+              << error << ", " << description
               << std::endl;
     }
 }

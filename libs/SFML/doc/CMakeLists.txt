@@ -53,10 +53,10 @@ add_custom_target(doc ALL
 
 # setup install rules
 install(DIRECTORY ${DOXYGEN_OUTPUT_DIR}/html
-        DESTINATION ${CMAKE_INSTALL_DOCDIR}
+        DESTINATION ${SFML_MISC_INSTALL_PREFIX}/doc
         COMPONENT doc)
 if(DOXYGEN_HHC_PROGRAM)
     install(FILES ${DOXYGEN_OUTPUT_DIR}/sfml.chm
-            DESTINATION ${CMAKE_INSTALL_DOCDIR}
+            DESTINATION ${SFML_MISC_INSTALL_PREFIX}/doc
             COMPONENT doc)
 endif()

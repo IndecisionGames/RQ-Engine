@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2019 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2018 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -92,6 +92,10 @@ m_cacheId      (getUniqueId())
         if (create(copy.getSize().x, copy.getSize().y))
         {
             update(copy);
+
+            // Force an OpenGL flush, so that the texture will appear updated
+            // in all contexts immediately (solves problems in multi-threaded apps)
+            glCheck(glFlush());
         }
         else
         {
@@ -162,7 +166,7 @@ bool Texture::create(unsigned int width, unsigned int height)
     // Make sure that the current texture binding will be preserved
     priv::TextureSaver save;
 
-    static bool textureEdgeClamp = GLEXT_texture_edge_clamp;
+    static bool textureEdgeClamp = GLEXT_texture_edge_clamp || GLEXT_EXT_texture_edge_clamp;
 
     if (!m_isRepeated && !textureEdgeClamp)
     {
@@ -655,7 +659,7 @@ void Texture::setRepeated(bool repeated)
             // Make sure that the current texture binding will be preserved
             priv::TextureSaver save;
 
-            static bool textureEdgeClamp = GLEXT_texture_edge_clamp;
+            static bool textureEdgeClamp = GLEXT_texture_edge_clamp || GLEXT_EXT_texture_edge_clamp;
 
             if (!m_isRepeated && !textureEdgeClamp)
             {
