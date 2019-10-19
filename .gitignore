@@ -33,7 +33,9 @@
 
 # Visual Studio
 .vs/
+.vscode/
 *.vs
+
 
 # Build files
 bin/
