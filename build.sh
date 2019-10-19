@@ -16,7 +16,7 @@ if [[ "$WINDOWS" = true ]]; then
 	SOURCE='libs/SFML/lib'
 	for file in $SOURCE/*.dll
 	do
-	 cp ${file} .
+		cp ${file} .
 	done
 else
 	cmake ..
