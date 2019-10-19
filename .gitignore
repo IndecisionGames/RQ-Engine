@@ -37,3 +37,4 @@
 
 # Build files
 bin/
+libs/SFML/cmake/SFML/
