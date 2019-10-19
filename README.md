@@ -1,8 +1,7 @@
 # RQ Engine
 
-
 #### Setup
-Creates folders ands runs cmake and make on libraries
+(No Longer needed)
 ```
 ./setup.sh
 ```
