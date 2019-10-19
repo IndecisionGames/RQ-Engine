@@ -36,7 +36,6 @@
 .vscode/
 *.vs
 
-
 # Build files
 bin/
-libs/SFML/cmake/SFML/
+build-libs/

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2019 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2018 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -29,7 +29,7 @@
 #include <SFML/Audio/ALCheck.hpp>
 #include <SFML/Audio/Listener.hpp>
 #include <SFML/System/Err.hpp>
-#include <vector>
+#include <memory>
 
 
 namespace
@@ -107,13 +107,9 @@ bool AudioDevice::isExtensionSupported(const std::string& extension)
     // This device will not be used in this function and merely
     // makes sure there is a valid OpenAL device for extension
     // queries if none has been created yet.
-    //
-    // Using an std::vector for this since auto_ptr is deprecated
-    // and we have no better STL facility for dynamically allocating
-    // a temporary instance with strong exception guarantee.
-    std::vector<AudioDevice> device;
+    std::auto_ptr<AudioDevice> device;
     if (!audioDevice)
-        device.resize(1);
+        device.reset(new AudioDevice);
 
     if ((extension.length() > 2) && (extension.substr(0, 3) == "ALC"))
         return alcIsExtensionPresent(audioDevice, extension.c_str()) != AL_FALSE;
@@ -129,13 +125,9 @@ int AudioDevice::getFormatFromChannelCount(unsigned int channelCount)
     // This device will not be used in this function and merely
     // makes sure there is a valid OpenAL device for format
     // queries if none has been created yet.
-    //
-    // Using an std::vector for this since auto_ptr is deprecated
-    // and we have no better STL facility for dynamically allocating
-    // a temporary instance with strong exception guarantee.
-    std::vector<AudioDevice> device;
+    std::auto_ptr<AudioDevice> device;
     if (!audioDevice)
-        device.resize(1);
+        device.reset(new AudioDevice);
 
     // Find the good format according to the number of channels
     int format = 0;
