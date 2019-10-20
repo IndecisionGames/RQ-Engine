@@ -23,4 +23,3 @@ else
     make
 fi
 cd ..
-$SHELL
