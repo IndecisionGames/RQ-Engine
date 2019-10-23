@@ -62,9 +62,9 @@ bool Timer::isPaused(){
 //
 // FPS Limiter and Timestep
 //
-FpsTimer::FpsTimer(){}
-void FpsTimer::init(float _maxFPS){
-    maxFPS = _maxFPS;
+FpsTimer::FpsTimer(int maxFramesPerSecond){
+    maxFPS = maxFramesPerSecond;
+    currentFPS = maxFramesPerSecond;
     frameCount = 0;
     clock = sf::Clock();
     startTime = sf::microseconds(0);
@@ -77,30 +77,31 @@ void FpsTimer::start(){
 }
 
 void FpsTimer::update(){
-    if(frameCount == SAMPLE_RATE){
+    if(frameCount == SAMPLE_FRAME){
         sf::Time currentTime = clock.getElapsedTime();
         frameCount = 0;
-        currentFPS = (float)SAMPLE_RATE / (currentTime - fpsCounterTime).asSeconds();
+        currentFPS = (float)SAMPLE_FRAME / (currentTime - fpsCounterTime).asSeconds();
         fpsCounterTime = currentTime;
     }
 }
 
 void FpsTimer::limit(){
     sf::Time currentTime = clock.getElapsedTime();
-    if(frameCount == SAMPLE_RATE){
+    if(frameCount == SAMPLE_FRAME){
         frameCount = 0;
-        currentFPS = (float)SAMPLE_RATE / (currentTime - fpsCounterTime).asSeconds();
+        currentFPS = (float)SAMPLE_FRAME / (currentTime - fpsCounterTime).asSeconds();
         fpsCounterTime = currentTime;
     }
     float frameTime = (currentTime - startTime).asSeconds();
-    if (1.0f > maxFPS * frameTime) {
-        sf::Time delay = sf::seconds(1.0f - maxFPS * frameTime);
+    float maxFrameTime = 1.0f/(float)maxFPS;
+    if (maxFrameTime > frameTime){
+        sf::Time delay = sf::seconds(maxFrameTime - frameTime);
         sf::sleep(delay);
     }
 }
 
-void FpsTimer::setMaxFps(float _maxFPS){
-    maxFPS = _maxFPS;
+void FpsTimer::setMaxFps(int maxFramesPerSecond){
+    maxFPS = maxFramesPerSecond;
 }
 
 float FpsTimer::getCurrentFPS(){
@@ -112,5 +113,5 @@ float FpsTimer::getDeltaTime(){
 }
 
 float FpsTimer::getMaxDeltaTime(){
-    return 1.0f / maxFPS;
+    return 1.0f / (float)maxFPS;
 }
