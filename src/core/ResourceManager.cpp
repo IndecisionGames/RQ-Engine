@@ -3,16 +3,15 @@
 using namespace RQEngine;
 //
 // A Resource Manager which will help with loading, storing
-// and retrieving resources such as textures and sprites
+// and retrieving resources such as textures (soon also sound and fonts)
 //
 std::unordered_map<std::string, sf::Texture> ResourceManager::textureMap;
-std::unordered_map<std::string, sf::Sprite> ResourceManager::spriteMap;
 
 ResourceManager::ResourceManager() {}
+ResourceManager::~ResourceManager() {}
 
-ResourceManager::~ResourceManager() {
+void ResourceManager::cleanUp() {
 	textureMap.clear();
-	spriteMap.clear();
 }
 
 bool ResourceManager::loadTexture(const std::string &filepath, const std::string &textureName, bool smooth) {
@@ -27,27 +26,20 @@ bool ResourceManager::loadTexture(const std::string &filepath, const std::string
 	return true;
 }
 
-bool ResourceManager::createSprite(const std::string &spriteName, const std::string &textureName,
+// TODO: Refactor to sprite's wrapper class (entity)
+sf::Sprite ResourceManager::createSprite(const std::string &textureName,
 	int originX, int originY, int width, int height) {
 	sf::Sprite newSprite;
 
 	auto textureIt = textureMap.find(textureName);
 	if (textureIt == textureMap.end()) {
 		printf("Unable to load texture %s!\n", textureName.c_str());
-		return false;
 	}
-	newSprite.setTexture(textureIt->second);
-	newSprite.setTextureRect(sf::IntRect(originX, originY, width, height));
-	spriteMap.insert_or_assign(spriteName, newSprite);
-	return true;
-}
-
-
-sf::Sprite* ResourceManager::getSprite(const std::string &spriteName) {
-	auto spriteIt = spriteMap.find(spriteName);
-	if (spriteIt == spriteMap.end()) {
-		printf("Unable to load sprite %s!\n", spriteName.c_str());
-		return NULL;
+	else {
+		newSprite.setTexture(textureIt->second);
+		if (originX != -1 && originY != -1 && width != -1 && height != -1) {
+			newSprite.setTextureRect(sf::IntRect(originX, originY, width, height));
+		}
 	}
-	return &(spriteIt->second);
+	return newSprite;
 }
