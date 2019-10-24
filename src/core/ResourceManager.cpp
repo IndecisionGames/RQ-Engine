@@ -6,6 +6,8 @@ using namespace RQEngine;
 // and retrieving resources such as textures (soon also sound and fonts)
 //
 std::unordered_map<std::string, sf::Texture> ResourceManager::textureMap;
+std::unordered_map<std::string, sf::SoundBuffer> ResourceManager::soundMap;
+std::unordered_map<std::string, sf::Font> ResourceManager::fontMap;
 
 ResourceManager::ResourceManager() {}
 ResourceManager::~ResourceManager() {}
@@ -23,6 +25,28 @@ bool ResourceManager::loadTexture(const std::string &filepath, const std::string
 	}
 	newTexture.setSmooth(smooth);
 	textureMap.insert_or_assign(textureName, newTexture);
+	return true;
+}
+
+bool ResourceManager::loadSound(const std::string& filepath, const std::string& soundName) {
+	sf::SoundBuffer newSoundBuffer;
+	if (!newSoundBuffer.loadFromFile(filepath))
+	{
+		printf("Unable to load sound from %s!\n", filepath.c_str());
+		return false;
+	}
+	soundMap.insert_or_assign(soundName, newSoundBuffer);
+	return true;
+}
+
+bool ResourceManager::loadFont(const std::string& filepath, const std::string& fontName) {
+	sf::Font newFont;
+	if (!newFont.loadFromFile(filepath))
+	{
+		printf("Unable to load font from %s!\n", filepath.c_str());
+		return false;
+	}
+	fontMap.insert_or_assign(fontName, newFont);
 	return true;
 }
 
