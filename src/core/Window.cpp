@@ -4,7 +4,7 @@
 using namespace RQEngine;
 
 Window::Window(const std::string& wName, int wWidth, int wHeight, int maxFPS)
-    : window(sf::VideoMode(wWidth, wHeight), wName), EM(&window), fps(maxFPS){}
+    : window(sf::VideoMode(wWidth, wHeight), wName, sf::Style::Titlebar | sf::Style::Close ), EM(&window), fps(maxFPS){}
 
 void Window::update(){
     fps.start();
