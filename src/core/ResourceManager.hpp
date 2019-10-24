@@ -18,8 +18,8 @@ namespace RQEngine {
 		static sf::Sprite* getSprite(const std::string& spriteName);
 
 	private:
-		static std::unordered_map<std::string, sf::Texture> *textureMap;
-		static std::unordered_map<std::string, sf::Sprite> *spriteMap;
+		static std::unordered_map<std::string, sf::Texture> textureMap;
+		static std::unordered_map<std::string, sf::Sprite> spriteMap;
 	};
 
 
