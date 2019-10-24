@@ -5,6 +5,7 @@
 #include "EventManager.hpp"
 #include "Timer.hpp"
 #include "Window.hpp"
+#include "ResourceManager.hpp"
 
 namespace RQEngine{
 }
