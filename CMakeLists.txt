@@ -4,6 +4,8 @@ project(RQ-Engine)
 set (RQ-Engine_VERSION_MAJOR 0)
 set (RQ-Engine_VERSION_MINOR 1)
 
+set (CMAKE_CXX_STANDARD 14)
+
 # libs
 add_subdirectory(libs/SFML)
 add_subdirectory(libs/Box2D)
