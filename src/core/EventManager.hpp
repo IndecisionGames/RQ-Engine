@@ -9,6 +9,7 @@ namespace RQEngine{
     class EventManager{
 
         public:
+            EventManager() {};
             EventManager(sf::Window* window);
             ~EventManager();
 

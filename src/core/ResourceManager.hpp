@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RQ_include.h"
+#include "../RQ_include.h"
 
 namespace RQEngine {
 
@@ -26,9 +26,9 @@ namespace RQEngine {
         static sf::SoundBuffer* getSound(const std::string &soundName);
 
     private:
-        static std::unordered_map<std::string, sf::Texture> textureMap;
-        static std::unordered_map<std::string, sf::SoundBuffer> soundMap;
-        static std::unordered_map<std::string, sf::Font> fontMap;
+        static std::unordered_map<std::string, std::unique_ptr<sf::Texture>> textureMap;
+        static std::unordered_map<std::string, std::unique_ptr<sf::SoundBuffer>> soundMap;
+        static std::unordered_map<std::string, std::unique_ptr<sf::Font>> fontMap;
 
     };
 

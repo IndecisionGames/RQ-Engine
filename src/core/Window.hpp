@@ -10,15 +10,16 @@ namespace RQEngine{
     class Window{
 
         public:
+            //Window() {};
             Window(const std::string& wName, int wWidth=800, int wHeight=600, int maxFPS=60);
 
-            void update();
+            void Update();
 
-            void prepareFrame();
-            void draw(const sf::Drawable& drawable);
-            void drawFrame();
+            void PrepareFrame();
+            void Draw(const sf::Drawable& drawable);
+            void DrawFrame();
 
-            bool isOpen() const;
+            bool IsOpen() const;
 
         private:
 
